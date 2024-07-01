@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #b6d1dc;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    min-height: 100vh; 
+    position: relative; 
+  }
+  
+  .alert-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 1000; 
+  }
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+  }
+  
+  .alert .btn-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #856404;
+    opacity: 0.5;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+    {% csrf_token %}
+  {% if messages %}
+  <div class="alert-container">
+    <!-- Alert Messages -->
+    {% for msg in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Hey!</strong> {{ msg }}
+      <button type="button" class="btn-close" onclick="this.parentElement.style.display='none';" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% block content %}
+
+  {% endblock %}
+</body>
+</html>
